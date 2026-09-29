@@ -9,6 +9,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "debts")
@@ -19,11 +23,21 @@ public class Debt {
 	private Long id;
 	
 	@CPF(message = "CPF inválido")
+	@NotBlank(message = "CPF do devedor não pode ser nulo")
 	private String cpfDevedor;
 	
-	private BigDecimal valorPego;
-	private BigDecimal valorComJuros;
-	private BigDecimal valorComDesconto;
+	
+	@NotNull(message = "Valor pego é obrigatório")
+    @Positive(message = "Valor pego deve ser maior que zero")
+    private BigDecimal valorPego;
+
+    @NotNull(message = "Valor com juros é obrigatório")
+    @PositiveOrZero(message = "Valor com juros não pode ser negativo")
+    private BigDecimal valorComJuros;
+
+    @NotNull(message = "Valor com desconto é obrigatório")
+    @PositiveOrZero(message = "Valor com desconto não pode ser negativo")
+    private BigDecimal valorComDesconto;
 	
 	public Debt() {
 		super();

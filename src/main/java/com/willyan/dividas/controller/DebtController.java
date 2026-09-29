@@ -37,6 +37,12 @@ public class DebtController {
 		debtService.register(newDebtRequest);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
+	
+	@GetMapping("/{cpf}/search")
+	public ResponseEntity<DebtResponse> findByCpf(
+			@PathVariable String cpf) {
+		return ResponseEntity.ok(debtService.findByCpf(cpf));
+	}
 
 	@GetMapping("/{debtId}")
 	public ResponseEntity<DebtResponse> findById(@PathVariable Long debtId) {
