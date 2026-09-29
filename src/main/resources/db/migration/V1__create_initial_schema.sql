@@ -1,0 +1,2 @@
+-- Initial Flyway migration.
+-- Add tables and constraints here as the debt-control domain evolves.
